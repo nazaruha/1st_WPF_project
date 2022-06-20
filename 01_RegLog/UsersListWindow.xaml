@@ -5,18 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_01_RegLog"
         mc:Ignorable="d"
-        Title="UsersListWindow" Height="429" Width="682">
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Right" Margin="10,0,0,0">
+        Title="UsersListWindow" Height="413" Width="611">
+    <DockPanel Margin="0,0,0,5">
+        <StackPanel DockPanel.Dock="Right" Margin="10,0,0,0" Height="327">
             <Button Name="addUser_btn" Margin="0,5" Click="addUser_btn_Click">Add</Button>
             <Button Name="deleteUser_btn" Margin="0,5" Click="deleteUser_btn_Click">Delete</Button>
             <Button Name="changeUser_btn" Margin="0,5" Click="changeUser_btn_Click">Change</Button>
             <Button Name="randomUser_btn" Margin="0,5" Click="randomUser_btn_Click">Generate data</Button>
             <Button Name="searchUser_btn" Margin="0,5" Click="SearchUser_btn_Click">Search</Button>
             <Button Name="allUsers_btn" Margin="0,5" Click="allUsers_btn_Click">All Users</Button>
-            <Button Name="refreshDG_btn" Margin="0,181,0,0" Click="refreshDG_btn_Click">Refresh</Button>
+            <Button Name="refreshDG_btn" Margin="0,111,0,0" Click="refreshDG_btn_Click">Refresh</Button>
         </StackPanel>
-        <DataGrid x:Name="dgUsers" IsReadOnly="True" VerticalScrollBarVisibility="Visible" Background="LightGray" RowBackground="LightYellow" AlternatingRowBackground="LightBlue" CanUserAddRows="False" AutoGenerateColumns="False" Width="650" Height="390">
+        <WrapPanel DockPanel.Dock="Bottom">
+            <Button Name="prevPage_btn" Content="Prev" Height="30" Width="64" Margin="152,0,6,0" Click="prevPage_btn_Click"/>
+            <Label Name="pageNumber_label" Content="1 of 20"/>
+            <Button Name="nextPage_btn" Content="Next" Height="30" Width="64" Margin="14,0,0,0" Click="nextPage_btn_Click"/>
+        </WrapPanel>
+        <DataGrid x:Name="dgUsers" IsReadOnly="True" VerticalScrollBarVisibility="Visible" Background="LightGray" RowBackground="LightYellow" AlternatingRowBackground="LightBlue" CanUserAddRows="False" AutoGenerateColumns="False" Width="470" Height="316">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Surname" Binding="{Binding Surname}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>

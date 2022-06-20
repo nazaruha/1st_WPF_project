@@ -44,17 +44,6 @@ namespace _01_RegLog
             InitializeComponent();
             _newUser = data.Users.Find(userId);
             this.imagesPath = imagesPath;
-            //_newUser = new User()
-            //{
-            //    Id = user.Id,
-            //    SNP = user.Surname + ' ' + user.Name,
-            //    Name = user.Name,
-            //    Surname = user.Surname,
-            //    Phone = user.Phone,
-            //    Email = user.Email,
-            //    Password = user.Password,
-            //    Image = user.ImageUrl
-            //};
 
             Id = _newUser.Id;
             txtSNP.Text = _newUser.Surname + ' ' + _newUser.Name;
@@ -243,7 +232,6 @@ namespace _01_RegLog
                     {
                         File.Delete(file.FullName);
                     }
-
                     
                     return;
                 }

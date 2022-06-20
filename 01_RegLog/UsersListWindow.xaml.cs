@@ -26,7 +26,10 @@ namespace _01_RegLog
         public string imagesPath { get; set; } = Directory.GetCurrentDirectory() + "/Users Images/";
         private MyDataContext data = new MyDataContext();
         private ObservableCollection<UserVM> users = new ObservableCollection<UserVM>(); // пов'язане з базою нашою. Змінює її
-
+        int page;
+        int pages;
+        int pageSize = 10;
+        int usersCount;
 
         public UsersListWindow()
         {
@@ -34,9 +37,16 @@ namespace _01_RegLog
             InitializeDataGrid();
         }
 
-        private void InitializeDataGrid()
+        private void InitializeDataGrid(int currentPage = 1)
         {
-            var con = data.Users.Select(x => new UserVM
+            var query = data.Users.AsQueryable();
+            page = currentPage;
+            int skip = (page - 1) * pageSize;
+            usersCount = query.Count();
+            pages = (int)Math.Ceiling((double)usersCount / (double)pageSize);
+            query = query.Skip(skip).Take(10);
+
+            var con = query.Select(x => new UserVM
             {
                 Id = x.Id,
                 Surname = x.Surname,
@@ -44,10 +54,20 @@ namespace _01_RegLog
                 Email = x.Email,
                 Phone = x.Phone,
                 Password = x.Password,
-                ImageUrl = imagesPath + x.Image
+                ImageUrl = x.Image
             }).ToList();
             users = new ObservableCollection<UserVM>(con);
+            for (int i = 0; i < users.Count(); i++)
+            {
+                if (!Uri.IsWellFormedUriString(users[i].ImageUrl, UriKind.Absolute))
+                {
+                    users[i].ImageUrl = imagesPath + users[i].ImageUrl;
+                }
+            }
             dgUsers.ItemsSource = users;
+            pageNumber_label.Content = $"{page} of {pages}";
+            
+
         }
 
         private void addUser_btn_Click(object sender, RoutedEventArgs e)
@@ -55,7 +75,7 @@ namespace _01_RegLog
             RegisterWindow registration = new RegisterWindow();
             registration.Title = "Registration new user";
             registration.ShowDialog();
-            InitializeDataGrid();
+            InitializeDataGrid(page);
         }
 
         private void deleteUser_btn_Click(object sender, RoutedEventArgs e)
@@ -149,7 +169,25 @@ namespace _01_RegLog
 
         private void refreshDG_btn_Click(object sender, RoutedEventArgs e)
         {
-            InitializeDataGrid();
+            InitializeDataGrid(page);
+        }
+
+        private void prevPage_btn_Click(object sender, RoutedEventArgs e)
+        {
+            if (page > 1)
+            {
+                page--;
+                InitializeDataGrid(page);
+            }
+        }
+
+        private void nextPage_btn_Click(object sender, RoutedEventArgs e)
+        {
+            if (page < pages)
+            {
+                page++;
+                InitializeDataGrid(page);
+            }
         }
     }
 }
