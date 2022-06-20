@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <RootNamespace>_01_RegLog</RootNamespace>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="eye-close-icon.png" />
+    <None Remove="eye-icon.png" />
+    <None Remove="eye-open-icon.png" />
+    <None Remove="picture.jpg" />
+    <None Remove="Pictures-icon.png" />
+    <None Remove="Scan_20220131 %282%29.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="34.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.17" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="eye-close-icon.png" />
+    <Resource Include="eye-open-icon.png" />
+    <Resource Include="Pictures-icon.png" />
+  </ItemGroup>
+
+</Project>

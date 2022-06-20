@@ -1,0 +1,36 @@
+﻿<Window x:Class="_01_RegLog.SearchUsersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_01_RegLog"
+        mc:Ignorable="d"
+        Title="SearchUsersWindow" Height="203" Width="503">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="17*"/>
+            <RowDefinition Height="14*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <WrapPanel Grid.Column="1">
+            <StackPanel Margin="11,0,0,0">
+                <Label Content="Full Name" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBox Name="txtSNP" Width="121" Height="24" TextChanged="txtSNP_TextChanged" FontSize="16" />
+                <Label Content="Lomock Danil" FontWeight="Bold" Foreground="#FFAEADAD"/>
+            </StackPanel>
+            <StackPanel Margin="22,0,0,0">
+                <Label Content="Email" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBox Name="txtEmail" Width="121" Height="24" TextChanged="txtEmail_TextChanged" FontSize="16" />
+                <Label Content="danil@mail.com" FontWeight="Bold" Foreground="#FFAEADAD"/>
+            </StackPanel>
+            <StackPanel Margin="21,0,0,0">
+                <Label Content="Phone" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBox x:Name="txtPhone" Width="121" Height="24" TextChanged="txtPhone_TextChanged" FontSize="16" />
+                <Label Content="(096) 125-54-92" FontWeight="Bold" Foreground="#FFAEADAD"/>
+            </StackPanel>
+        </WrapPanel>
+        <Button Content="Search User" Margin="0,19,0,25" Grid.Row="1" HorizontalAlignment="Center" Width="186" FontWeight="Bold" FontSize="16" Click="Button_Click"/>
+    </Grid>
+</Window>

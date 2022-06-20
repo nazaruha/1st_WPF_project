@@ -1,0 +1,25 @@
+﻿<Window x:Class="_01_RegLog.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_01_RegLog"
+        mc:Ignorable="d"
+        Title="UserWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="187*"/>
+            <RowDefinition Height="212*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.RowSpan="1">
+            <Label Name="txtlLabe2" Content="Your personal Web-page" Height="30" Width="174" Margin="304,0,0,0" FontWeight="Bold" FontSize="14"/>
+        </WrapPanel>
+        <WrapPanel Grid.RowSpan="2" Margin="0,25,0,0">
+            <Image Name="Avatar" HorizontalAlignment="Left" Height="146" Margin="10,30,0,0" VerticalAlignment="Top" Width="144" Stretch="Fill"/>
+            <Label Name="txtLabel2" Content="Greetings, " Width="296" Height="33" Margin="21,0,0,-128" FontWeight="Bold" FontStyle="Normal" FontSize="18" />
+        </WrapPanel>
+        <Button Name="usersList_btn" Content="User's list" HorizontalAlignment="Left" Height="36" Margin="587,59,0,0" Grid.Row="2" VerticalAlignment="Top" Width="159" Click="usersList_btn_Click"/>
+
+    </Grid>
+</Window>

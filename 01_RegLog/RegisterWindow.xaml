@@ -1,0 +1,93 @@
+﻿<Window x:Class="_01_RegLog.RegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_01_RegLog"
+        mc:Ignorable="d"
+        Title="Registration" Height="430" Width="429">
+    <Canvas>
+        <Label Content="SIGNING UP"
+               Height="37"
+               Canvas.Left="145"
+               Canvas.Top="10"
+               Width="136" 
+               FontSize="20"
+               FontWeight="Bold"/>
+
+        <StackPanel Canvas.Left="35" Canvas.Top="55">
+            <WrapPanel Canvas.Left="36" Canvas.Top="47">
+                <Label Content="SNP:"
+                   FontSize="16"
+                   FontWeight="Bold"/>
+                <TextBox Name="txtSNP" 
+                     Width="236"
+                     FontSize="14" 
+                     Height="21" 
+                     Foreground="Black"/>
+            </WrapPanel>
+
+            <WrapPanel Margin="0,0,0,0">
+                <Label Content="Phone (+38):"
+                   FontSize="16"
+                   FontWeight="Bold"/>
+                <TextBox Name="txtPhone" 
+                     Width="204"
+                     FontSize="14" 
+                     Height="21" 
+                     Foreground="Black"/>
+            </WrapPanel>
+
+            <WrapPanel Margin="0,0,0,0">
+                <Label Content="Email:"
+                   FontSize="16"
+                   FontWeight="Bold"/>
+                <TextBox Name="txtEmail" 
+                     Width="204"
+                     FontSize="14" 
+                     Height="21" 
+                     Foreground="Black"/>
+            </WrapPanel>
+
+            <WrapPanel Margin="0,0,0,0">
+                <Label Content="Password:"
+                   FontSize="16"
+                   FontWeight="Bold"/>
+                <PasswordBox Name="txtPasswordHidden" 
+                     Width="204"
+                     FontSize="14" 
+                     Height="21" 
+                     Foreground="Black" Visibility="Visible"
+                     PasswordChar="•"/>
+            </WrapPanel>
+
+            <WrapPanel Margin="0,0,0,0">
+                <Label Content="Confirm password:"
+                   FontSize="16"
+                   FontWeight="Bold"/>
+                <PasswordBox Name="txtConfirmPasswordHidden" 
+                     Width="204"
+                     FontSize="14" 
+                     Height="21" 
+                     Foreground="Black"
+                     PasswordChar="•"/>
+            </WrapPanel>
+
+            <WrapPanel Margin="13,6,0,0">
+                <Image Name="Avatar" Width="85" Height="83" Source="/Pictures-icon.png" />
+                <Button Name="addAvatar_btn" Width="132" Height="33" Content="Upload avatar" FontSize="16" FontWeight="Bold" Margin="25,0,0,0" Click="addAvatar_btn_Click" />
+            </WrapPanel>
+        </StackPanel>
+
+        <Button Name="SignUp_btn"
+            Content="Sign Up"
+            Height="37"
+            Canvas.Left="143"
+            Canvas.Top="323"
+            Width="140" FontSize="20" FontWeight="Bold" Click="SignUp_btn_Click"/>
+        <Image Name="PassworView" Height="24" Canvas.Left="329" Canvas.Top="152" Width="21" Stretch="Uniform" Source="/eye-close-icon.png" MouseDown="Image_MouseDown"/>
+        <TextBox Name="txtPasswordShown" Height="21" Canvas.Left="120" Canvas.Top="154" TextWrapping="Wrap" Width="204" Visibility="Hidden"/>
+        <TextBox Name="txtConfirmPasswordShown" Height="21" Canvas.Left="186" Canvas.Top="186" TextWrapping="Wrap" Width="204" Visibility="Hidden"/>
+
+    </Canvas>
+</Window>
