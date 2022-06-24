@@ -37,7 +37,34 @@ namespace _01_RegLog
             }
             else
             {
-                Avatar.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + "/Users Images/" + user_data.Image));
+                string fileName = Directory.GetCurrentDirectory() + "/Users Images/" + user_data.Image;
+                using (FileStream file = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+                {
+                    byte[] bytes = new byte[file.Length];
+                    file.Read(bytes, 0, (int)file.Length);
+                    var imageSource = new BitmapImage();
+                    using (var bmpStream = new MemoryStream(bytes, 0, (int)file.Length))
+                    {
+                        imageSource.BeginInit();
+                        imageSource.StreamSource = bmpStream;
+                        imageSource.CacheOption = BitmapCacheOption.OnLoad;
+                        imageSource.EndInit();
+                    }
+
+                    imageSource.Freeze(); // here
+
+                    if (Avatar.Dispatcher.CheckAccess())
+                    {
+                        Avatar.Source = imageSource;
+                    }
+                    else
+                    {
+                        Action act = () => { Avatar.Source = imageSource; };
+                        Avatar.Dispatcher.BeginInvoke(act);
+                    }
+                }
+
+                //Avatar.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + "/Users Images/" + user_data.Image));
             }
             //if (!user_data.Image.Contains("http"))
             //{
