@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -95,6 +97,33 @@ namespace _01_RegLog.Models
             }
         }
 
+
+
+        public ImageSource Image_View
+        {
+            get 
+            {
+                using (FileStream file = new FileStream(ImageUrl, FileMode.Open, FileAccess.Read))
+                {
+                    byte[] bytes = new byte[file.Length];
+                    file.Read(bytes, 0, (int)file.Length);
+                    var imageSource = new BitmapImage();
+                    using (var bmpStream = new MemoryStream(bytes, 0, (int)file.Length))
+                    {
+                        imageSource.BeginInit();
+                        imageSource.StreamSource = bmpStream;
+                        imageSource.CacheOption = BitmapCacheOption.OnLoad;
+                        imageSource.EndInit();
+                    }
+
+                    imageSource.Freeze(); // here
+
+                    return imageSource;
+                }
+            }
+        }
+
+
         private string password;
 
         public string Password
@@ -110,9 +139,6 @@ namespace _01_RegLog.Models
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
-
-        
-
 
     }
 }

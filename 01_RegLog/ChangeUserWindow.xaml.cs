@@ -236,6 +236,37 @@ namespace _01_RegLog
                     return;
                 }
             }
+           
+        }
+
+        private void DisposeImage()
+        {
+            string fileName = Directory.GetCurrentDirectory() + "/Users Images/" + _newUser.Image;
+            using (FileStream file = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            {
+                byte[] bytes = new byte[file.Length];
+                file.Read(bytes, 0, (int)file.Length);
+                var imageSource = new BitmapImage();
+                using (var bmpStream = new MemoryStream(bytes, 0, (int)file.Length))
+                {
+                    imageSource.BeginInit();
+                    imageSource.StreamSource = bmpStream;
+                    imageSource.CacheOption = BitmapCacheOption.OnLoad;
+                    imageSource.EndInit();
+                }
+
+                imageSource.Freeze(); // here
+
+                if (Avatar.Dispatcher.CheckAccess())
+                {
+                    Avatar.Source = imageSource;
+                }
+                else
+                {
+                    Action act = () => { Avatar.Source = imageSource; };
+                    Avatar.Dispatcher.BeginInvoke(act);
+                }
+            }
         }
 
         private void saveImageSmaller(string fileRandName, string dir)

@@ -1,5 +1,6 @@
 ﻿using _01_RegLog.Models;
 using Bogus;
+using Microsoft.Graph;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,7 +24,7 @@ namespace _01_RegLog
     /// </summary>
     public partial class UsersListWindow : Window
     {
-        public string imagesPath { get; set; } = Directory.GetCurrentDirectory() + "/Users Images/";
+        public string imagesPath { get; set; } = System.IO.Directory.GetCurrentDirectory() + "/Users Images/";
         private MyDataContext data = new MyDataContext();
         private ObservableCollection<UserVM> users = new ObservableCollection<UserVM>(); // пов'язане з базою нашою. Змінює її
         int page;
@@ -62,12 +63,31 @@ namespace _01_RegLog
                 if (!Uri.IsWellFormedUriString(users[i].ImageUrl, UriKind.Absolute))
                 {
                     users[i].ImageUrl = imagesPath + users[i].ImageUrl;
+
                 }
             }
             dgUsers.ItemsSource = users;
             pageNumber_label.Content = $"{page} of {pages}";
             
 
+        }
+
+        private static BitmapImage LoadImage(byte[] imageData)
+        {
+            if (imageData == null || imageData.Length == 0) return null;
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(imageData))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
         }
 
         private void addUser_btn_Click(object sender, RoutedEventArgs e)
@@ -81,7 +101,7 @@ namespace _01_RegLog
         private void deleteUser_btn_Click(object sender, RoutedEventArgs e)
         {
             if (dgUsers.SelectedItem == null) return;
-            User userToRemove = data.Users.Find((dgUsers.SelectedItem as UserVM).Id);
+            Models.User userToRemove = data.Users.Find((dgUsers.SelectedItem as UserVM).Id);
             data.Users.Remove(userToRemove);
             data.SaveChanges();
             users.Remove(dgUsers.SelectedItem as UserVM);
@@ -104,12 +124,12 @@ namespace _01_RegLog
                 {
                     var userView = (dgUsers.SelectedItem as UserVM);
                     ChangeUserWindow changeUserWindow = new ChangeUserWindow(userView.Id, imagesPath);
-                    changeUserWindow.ShowDialog();
-
+                    changeUserWindow.Show(); 
                     if (changeUserWindow.newUser != null)
                     {
                         int index = users.IndexOf((dgUsers.SelectedItem as UserVM));
                         users[index] = changeUserWindow.newUser;
+                        
                     }
                 }
             }
@@ -119,7 +139,7 @@ namespace _01_RegLog
         private void randomUser_btn_Click(object sender, RoutedEventArgs e)
         {
             //uk - ua
-            var faker = new Faker<User>("uk")
+            var faker = new Faker<Models.User>("uk")
                 .RuleFor(u => u.Surname, (f, u) => f.Name.LastName())
                 .RuleFor(u => u.Name, (f, u) => f.Name.FirstName())
                 .RuleFor(u => u.Phone, f => f.Phone.PhoneNumber())

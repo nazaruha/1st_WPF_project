@@ -66,14 +66,6 @@ namespace _01_RegLog
 
                 //Avatar.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + "/Users Images/" + user_data.Image));
             }
-            //if (!user_data.Image.Contains("http"))
-            //{
-            //    Avatar.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + "/Users Images/" + user_data.Image));
-            //}
-            //else
-            //{
-            //    Avatar.Source = new BitmapImage(new Uri(user_data.Image));
-            //}
             txtLabel2.Content += $"{user_data.Name}!";
         }
 

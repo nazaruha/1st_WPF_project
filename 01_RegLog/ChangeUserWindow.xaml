@@ -72,8 +72,9 @@
                      PasswordChar="•"/>
             </WrapPanel>
 
+            <!--Source="/Pictures-icon.png"-->
             <WrapPanel Margin="13,6,0,0">
-                <Image Name="Avatar" Width="85" Height="83" Source="/Pictures-icon.png" />
+                <Image Name="Avatar" Width="85" Height="83" Source="{Binding Image_View}" />
                 <Button Name="addAvatar_btn" Width="132" Height="33" Content="Upload avatar" FontSize="16" FontWeight="Bold" Margin="25,0,0,0" Click="addAvatar_btn_Click" />
             </WrapPanel>
         </StackPanel>

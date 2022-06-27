@@ -31,7 +31,7 @@
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <DockPanel Background="Bisque">
-                        <Image DockPanel.Dock="Left" Source="{Binding ImageUrl}" Height="64" Margin="10"/>
+                        <Image Name="Avatar" DockPanel.Dock="Left" Source="{Binding Image_View}" Height="64" Margin="10"/>
                     </DockPanel>
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
